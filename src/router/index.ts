@@ -62,31 +62,6 @@ export const constantRoutes: RouteRecordRaw[] = [
     ],
   },
   {
-    path: "/link",
-    meta: {
-      title: "外链",
-      svgIcon: "link",
-    },
-    children: [
-      {
-        path: "",
-        component: () => {},
-        name: "Link1",
-        meta: {
-          title: "中文文档",
-        },
-      },
-      {
-        path: "",
-        component: () => {},
-        name: "Link2",
-        meta: {
-          title: "新手教程",
-        },
-      },
-    ],
-  },
-  {
     path: "/table",
     component: Layouts,
     redirect: "/table/element-plus",
