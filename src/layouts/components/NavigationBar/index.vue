@@ -11,6 +11,7 @@ import Breadcrumb from "../Breadcrumb/index.vue";
 import ThemeSwitch from "@/components/ThemeSwitch/index.vue";
 import Screenfull from "@/components/Screenfull/index.vue";
 import SearchMenu from "@/components/SearchMenu/index.vue";
+import SideBar from "@/layouts/components/SideBar/index.vue";
 import { DeviceEnum } from "@/constants/app-key";
 
 const router = useRouter();
@@ -40,7 +41,7 @@ const logout = () => {
   <div class="navigation-bar">
     <Hamburger v-if="!isTop || isMobile" :is-active="sidebar.opened" class="hamburger" @toggle-click="toggleSidebar" />
     <Breadcrumb v-if="!isTop || isMobile" class="breadcrumb" />
-    <Sidebar v-if="isTop && !isMobile" class="sidebar" />
+    <SideBar v-if="isTop && !isMobile" class="sidebar" />
     <div class="right-menu">
       <SearchMenu v-if="showSearchMenu" class="right-menu-item" />
       <Screenfull v-if="showScreenfull" class="right-menu-item" />
@@ -89,7 +90,7 @@ const logout = () => {
 
   .sidebar {
     flex: 1;
-    // 设置 min-width 是为了让 Sidebar 里的 el-menu 宽度自适应
+    // 设置 min-width 是为了让 SideBar 里的 el-menu 宽度自适应
     min-width: 0;
 
     :deep(.el-menu) {

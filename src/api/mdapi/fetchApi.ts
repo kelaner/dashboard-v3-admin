@@ -9,12 +9,9 @@ export default async function fetchApi(quaryBody: Object) {
     actionflow_id: VITE_ZION_ACTIONFLOW_ID,
   };
   const mdapi = zionMdapi.init(mdapiConfig);
-  const fetchRes: Object = {};
 
-  await mdapi.query(quaryBody).then((res) => {
-    console.log(res);
-    fetchRes.value = res;
-  });
+  const fetchRes = await mdapi.query(quaryBody);
+  console.log(fetchRes);
 
-  return fetchRes.value;
+  return fetchRes;
 }

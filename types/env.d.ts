@@ -6,6 +6,8 @@ declare interface ImportMetaEnv {
   readonly VITE_PUBLIC_PATH: string;
 }
 
+declare module "zion-mdapi";
+
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }

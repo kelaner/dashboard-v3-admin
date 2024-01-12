@@ -22,7 +22,7 @@ const formData = reactive({
   password: "",
 });
 const formRules: FormRules = reactive({
-  username: [{ required: true, trigger: "blur", message: "请输入管理人员名" }],
+  username: [{ required: true, trigger: "blur", message: "请输入管理人员名字" }],
   password: [{ required: true, trigger: "blur", message: "请输入密码" }],
 });
 const handleCreate = () => {
@@ -203,8 +203,8 @@ watch([() => paginationData.currentPage, () => paginationData.pageSize], getTabl
       @close="resetForm"
       width="30%"
     >
-      <el-form ref="formRef" :model="formData" :rules="formRules" label-width="100px" label-position="left">
-        <el-form-item prop="username" label="管理人员名">
+      <el-form ref="formRef" :model="formData" :rules="formRules" label-width="120px" label-position="left">
+        <el-form-item prop="username" label="管理人员姓名">
           <el-input v-model="formData.username" placeholder="请输入" />
         </el-form-item>
         <el-form-item prop="password" label="密码" v-if="currentUpdateId === undefined">
