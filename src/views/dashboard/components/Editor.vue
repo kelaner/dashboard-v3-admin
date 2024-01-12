@@ -1,6 +1,6 @@
 <script lang="js" setup>
-import zionMdapi from "zion-mdapi";
 import { onMounted, ref } from "vue";
+import fetchApi from "@/api/mdapi/fetchApi";
 
 const imgs = ref([]);
 
@@ -9,21 +9,14 @@ onMounted(async () => {
 });
 
 const fetchImgs = async () => {
-  const mdapiConfig = {
-    url: "https://zion-app.functorz.com/zero/l7YRy8q7m9g/api/graphql-v2",
-    actionflow_id: "5a58d947-3b59-47ea-9499-d11b9ba72a42",
+  const quaryBody = {
+    model: "resource",
+    fields: "img{url}",
   };
-  const mdapi = zionMdapi.init(mdapiConfig);
 
-  await mdapi
-    .debugActionflow({
-      actionflow_name: "demo",
-      actionflow_dir: "/",
-    })
-    .then((res) => {
-      console.log(res.data);
-      imgs.value = res.data;
-    });
+  imgs.value = await fetchApi(quaryBody);
+
+  console.log(imgs.value);
 };
 </script>
 

@@ -1,7 +1,7 @@
 // mdapi.config.json,放在项目根目录（node_modules同级目录下）
 {
   // 回调链接调用框架自定义行为
-  "callback_url": "https://zion-app.functorz.com/zero/l7YRy8q7m9g/api/graphql-v2",
+  "callback_url": "https://zion-app.functorz.com/zero/NyndxPeyPD6/api/graphql-v2",
   //zion项目信息配置
   "url": "",
   // 配置权限管理后可传入headers信息来支持调用制定接口
@@ -9,7 +9,7 @@
     "authorization": ""
   },
   // mdapi框架自定义行为actionflowId
-  "actionflow_id": "5a58d947-3b59-47ea-9499-d11b9ba72a42",
+  "actionflow_id": "ab1c967b-93e8-4b8e-838f-fd554eccd1c3",
   // mdapi框架自定义行为行为版本号,未配置则调用最新部署的版本号，一般在system?.actionflow_version中配置
   "actionflow_version": 0,
   //会自动追加到payload中的客户端数据

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { reactive, ref, watch } from "vue";
-import { createTableDataApi, deleteTableDataApi, updateTableDataApi, getTableDataApi } from "@/api/table";
+import { createTableDataApi, deleteTableDataApi, getTableDataApi, updateTableDataApi } from "@/api/table";
 import { type GetTableData } from "@/api/table/types/table";
-import { type FormInstance, type FormRules, ElMessage, ElMessageBox } from "element-plus";
-import { Search, Refresh, CirclePlus, Delete, Download, RefreshRight } from "@element-plus/icons-vue";
+import { ElMessage, ElMessageBox, type FormInstance, type FormRules } from "element-plus";
+import { CirclePlus, Delete, Download, Refresh, RefreshRight, Search } from "@element-plus/icons-vue";
 import { usePagination } from "@/hooks/usePagination";
 
 defineOptions({
@@ -22,8 +22,8 @@ const formData = reactive({
   password: "",
 });
 const formRules: FormRules = reactive({
-  username: [{ required: true, trigger: "blur", message: "请输入用户名" }],
-  password: [{ required: true, trigger: "blur", message: "请输入密码" }],
+  username: [{ required: true, trigger: "blur", message: "请输入商品名" }],
+  password: [{ required: true, trigger: "blur", message: "请输入价格" }],
 });
 const handleCreate = () => {
   formRef.value?.validate((valid: boolean, fields) => {
@@ -64,7 +64,7 @@ const resetForm = () => {
 
 //#region 删
 const handleDelete = (row: GetTableData) => {
-  ElMessageBox.confirm(`正在删除用户：${row.username}，确认删除？`, "提示", {
+  ElMessageBox.confirm(`正在删除商品：${row.username}，确认删除？`, "提示", {
     confirmButtonText: "确定",
     cancelButtonText: "取消",
     type: "warning",
@@ -129,12 +129,10 @@ watch([() => paginationData.currentPage, () => paginationData.pageSize], getTabl
   <div class="app-container">
     <el-card v-loading="loading" shadow="never" class="search-wrapper">
       <el-form ref="searchFormRef" :inline="true" :model="searchData">
-        <el-form-item prop="username" label="用户名">
+        <el-form-item prop="username" label="商品名">
           <el-input v-model="searchData.username" placeholder="请输入" />
         </el-form-item>
-        <el-form-item prop="phone" label="手机号">
-          <el-input v-model="searchData.phone" placeholder="请输入" />
-        </el-form-item>
+
         <el-form-item>
           <el-button type="primary" :icon="Search" @click="handleSearch">查询</el-button>
           <el-button :icon="Refresh" @click="resetSearch">重置</el-button>
@@ -144,7 +142,7 @@ watch([() => paginationData.currentPage, () => paginationData.pageSize], getTabl
     <el-card v-loading="loading" shadow="never">
       <div class="toolbar-wrapper">
         <div>
-          <el-button type="primary" :icon="CirclePlus" @click="dialogVisible = true">新增用户</el-button>
+          <el-button type="primary" :icon="CirclePlus" @click="dialogVisible = true">新增商品</el-button>
           <el-button type="danger" :icon="Delete">批量删除</el-button>
         </div>
         <div>
@@ -159,15 +157,9 @@ watch([() => paginationData.currentPage, () => paginationData.pageSize], getTabl
       <div class="table-wrapper">
         <el-table :data="tableData">
           <el-table-column type="selection" width="50" align="center" />
-          <el-table-column prop="username" label="用户名" align="center" />
-          <el-table-column prop="roles" label="角色" align="center">
-            <template #default="scope">
-              <el-tag v-if="scope.row.roles === 'admin'" effect="plain">admin</el-tag>
-              <el-tag v-else type="warning" effect="plain">{{ scope.row.roles }}</el-tag>
-            </template>
-          </el-table-column>
-          <el-table-column prop="phone" label="手机号" align="center" />
-          <el-table-column prop="email" label="邮箱" align="center" />
+          <el-table-column prop="username" label="商品名" align="center" />
+          <el-table-column prop="phone" label="价格" align="center" />
+          <el-table-column prop="email" label="库存" align="center" />
           <el-table-column prop="status" label="状态" align="center">
             <template #default="scope">
               <el-tag v-if="scope.row.status" type="success" effect="plain">启用</el-tag>
@@ -199,15 +191,15 @@ watch([() => paginationData.currentPage, () => paginationData.pageSize], getTabl
     <!-- 新增/修改 -->
     <el-dialog
       v-model="dialogVisible"
-      :title="currentUpdateId === undefined ? '新增用户' : '修改用户'"
+      :title="currentUpdateId === undefined ? '新增商品' : '修改商品'"
       @close="resetForm"
       width="30%"
     >
       <el-form ref="formRef" :model="formData" :rules="formRules" label-width="100px" label-position="left">
-        <el-form-item prop="username" label="用户名">
+        <el-form-item prop="username" label="商品名">
           <el-input v-model="formData.username" placeholder="请输入" />
         </el-form-item>
-        <el-form-item prop="password" label="密码" v-if="currentUpdateId === undefined">
+        <el-form-item prop="phone" label="价格" v-if="currentUpdateId === undefined">
           <el-input v-model="formData.password" placeholder="请输入" />
         </el-form-item>
       </el-form>
@@ -222,6 +214,7 @@ watch([() => paginationData.currentPage, () => paginationData.pageSize], getTabl
 <style lang="scss" scoped>
 .search-wrapper {
   margin-bottom: 20px;
+
   :deep(.el-card__body) {
     padding-bottom: 2px;
   }

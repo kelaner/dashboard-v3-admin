@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { reactive, ref, watch } from "vue";
-import { createTableDataApi, deleteTableDataApi, updateTableDataApi, getTableDataApi } from "@/api/table";
+import { createTableDataApi, deleteTableDataApi, getTableDataApi, updateTableDataApi } from "@/api/table";
 import { type GetTableData } from "@/api/table/types/table";
-import { type FormInstance, type FormRules, ElMessage, ElMessageBox } from "element-plus";
-import { Search, Refresh, CirclePlus, Delete, Download, RefreshRight } from "@element-plus/icons-vue";
+import { ElMessage, ElMessageBox, type FormInstance, type FormRules } from "element-plus";
+import { Refresh, Search } from "@element-plus/icons-vue";
 import { usePagination } from "@/hooks/usePagination";
 
 defineOptions({
@@ -142,31 +142,31 @@ watch([() => paginationData.currentPage, () => paginationData.pageSize], getTabl
       </el-form>
     </el-card>
     <el-card v-loading="loading" shadow="never">
-      <div class="toolbar-wrapper">
-        <div>
-          <el-button type="primary" :icon="CirclePlus" @click="dialogVisible = true">新增用户</el-button>
-          <el-button type="danger" :icon="Delete">批量删除</el-button>
-        </div>
-        <div>
-          <el-tooltip content="下载">
-            <el-button type="primary" :icon="Download" circle />
-          </el-tooltip>
-          <el-tooltip content="刷新当前页">
-            <el-button type="primary" :icon="RefreshRight" circle @click="getTableData" />
-          </el-tooltip>
-        </div>
-      </div>
+      <!--      <div class="toolbar-wrapper">-->
+      <!--        <div>-->
+      <!--          &lt;!&ndash;          <el-button type="primary" :icon="CirclePlus" @click="dialogVisible = true">新增用户</el-button>&ndash;&gt;-->
+      <!--          &lt;!&ndash;          <el-button type="danger" :icon="Delete">批量删除</el-button>&ndash;&gt;-->
+      <!--        </div>-->
+      <!--        <div style="margin-left: 30px">-->
+      <!--          <el-tooltip content="下载">-->
+      <!--            <el-button type="primary" :icon="Download" circle />-->
+      <!--          </el-tooltip>-->
+      <!--          <el-tooltip content="刷新当前页">-->
+      <!--            <el-button type="primary" :icon="RefreshRight" circle @click="getTableData" />-->
+      <!--          </el-tooltip>-->
+      <!--        </div>-->
+      <!--      </div>-->
       <div class="table-wrapper">
         <el-table :data="tableData">
-          <el-table-column type="selection" width="50" align="center" />
+          <!--          <el-table-column type="selection" width="50" align="center" />-->
           <el-table-column prop="username" label="用户名" align="center" />
           <el-table-column prop="roles" label="角色" align="center">
             <template #default="scope">
-              <el-tag v-if="scope.row.roles === 'admin'" effect="plain">admin</el-tag>
-              <el-tag v-else type="warning" effect="plain">{{ scope.row.roles }}</el-tag>
+              <el-tag v-if="scope.row.roles === 'admin'" effect="plain">common</el-tag>
+              <el-tag v-else type="warning" effect="plain">vip</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="phone" label="手机号" align="center" />
+          <el-table-column prop="phone" label="积分" align="center" />
           <el-table-column prop="email" label="邮箱" align="center" />
           <el-table-column prop="status" label="状态" align="center">
             <template #default="scope">
@@ -222,6 +222,7 @@ watch([() => paginationData.currentPage, () => paginationData.pageSize], getTabl
 <style lang="scss" scoped>
 .search-wrapper {
   margin-bottom: 20px;
+
   :deep(.el-card__body) {
     padding-bottom: 2px;
   }
