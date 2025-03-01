@@ -1,8 +1,3 @@
-<div style="text-align: center;">
-  <img alt="V3 Admin Vite Logo" width="120" height="120" src="./src/assets/layouts/logo.png">
-  <h1>Zion-V3-Admin</h1>
-</div>
-
 ## 🚀 开发
 
 ```bash
